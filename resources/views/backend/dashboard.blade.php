@@ -155,7 +155,7 @@
 
                         <div class="card mb-4">
                             <div class="card-header">
-                                <a class="btn btn-primary align-self-left" href="{{url('admin/category/create')}}" role="button">Add Item</a>
+                                <a class="btn btn-primary align-self-left" href="{{url('admin/category/add')}}" role="button">Add Item</a>
                                 <i class="fas fa-table me-1"></i>
                                 DataTable Example
                             </div>
