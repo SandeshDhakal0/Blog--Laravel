@@ -15,4 +15,5 @@ Route::get('/admin/login',[AdminController::class,'login']);
 Route::post('/admin/login',[AdminController::class,'submit_login']);
 Route::get('/admin/dashboard',[AdminController::class,'dashboard']);
 Route::resource('/admin/category', CategoryController::class);
-Route::view('/admin/category/create', 'backend/category/add');
+// Route::view('/admin/category/create', 'backend/category/add');
+// Route::view('/admin/category/index','backend/category/index');
