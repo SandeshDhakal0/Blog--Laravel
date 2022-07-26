@@ -15,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // Call the model to extract all the data from the database
         $data = Category::all();
        return view('backend.category.index',['data'=>$data]);
     }
@@ -67,10 +68,6 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -80,7 +77,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Category::find($id);
+        return view('backend.category.update',['data'=>$data]);
     }
 
     /**
@@ -92,7 +90,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'=>'required'
+        ]);
+
+        if($request->hasFile('cat_image'))
+        {
+            $image=$request->file('cat_image');
+            $reImage=time().'.'.$image->getClientOriginalExtension();
+            $destination=public_path('/imgs');
+            $image->move($destination,$reImage);
+        }
+        $category = Category::find($id);
+        $category->title=$request->title;
+        $category->detail=$request->detail;
+        $category->image= $reImage;
+        $category->save();
+
+        return redirect('admin/category/'.$id.'/edit')->with('success','The data has been submitted');
     }
 
     /**

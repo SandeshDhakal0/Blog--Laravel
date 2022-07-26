@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard </title>
+    <title>Add Category </title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -16,7 +16,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">What! News</a>
+        <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -121,81 +121,89 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    What! News
+                    Start Bootstrap
                 </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4">
-                    <h1 class="mt-4">Dashboard</h1>
+                <div class="container-fluid px-3">
+                    <h1 class="mt-3">Category</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">Add Category</li>
                     </ol>
+
+                    {{-- DataTables Example --}}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i> Add Category
+                            <a href="{{ url('admin/dashboard') }}" class="float-right btn btn-sm btn-dark">All
+                                Data</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                @if ($errors)
+                                    @foreach ($errors->all() as $error)
+                                        <p class="text-danger">{{ $error }}</p>
+                                    @endforeach
+                                @endif
+
+                                @if (Session::has('success'))
+                                    <p class="text-success">{{ session('success') }}</p>
+                                @endif
+
+                                <form method="post" action="{{ url('admin/category') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>Title</th>
+                                            <td><input type="text" name="title" value="{{ $data->title }}" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Detail</th>
+                                            <td><input type="text" name="detail" value="{{ $data->detail }}" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <p class="my-2"><img width="80" src="{{ asset('imgs') }}/{{ $data->image }}" /></p>
+                                            <th>Image</th>
+                                            <td><input type="file" name="cat_image" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <input type="submit" class="btn btn-primary" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                    </div>
                 </div>
 
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <a class="btn btn-primary align-self-left" href="{{ url('admin/category/create') }}"
-                            role="button">Add Item</a>
-                        <i class="fas fa-table me-1"></i>
-                        Data Table
-                    </div>
-                    <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Image</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Image</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                @foreach ($data as $cat)
-                                <tr>
-                                    <td>{{ $cat->id }}</td>
-                                    <td>{{ $cat->title }}</td>
-                                    <td><img src="{{ asset('imgs').'/'.$cat->image }}" width="100px"/></td>
-                                    <td>
-                                        <a class="btn btn-info btn-sm" href="{{url('admin/category'.$cat->id.'/edit')}}">Update</a>
-                                        <a class="btn btn-danger btn-sm" href="{{url('admin/category'.$cat->id.'/delete')}}">Delete</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
                     </div>
                 </div>
+            </footer>
         </div>
-        </main>
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid px-4">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        </div>
-        </div>
-
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('assets/demo/chart-bar-demo.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="{{ asset('js/datatables-simple-demo.js') }}"></script>
 </body>
