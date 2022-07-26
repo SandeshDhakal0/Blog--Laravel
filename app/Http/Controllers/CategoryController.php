@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Illuminate\Https\getClientOriginalExtention;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -17,7 +16,12 @@ class CategoryController extends Controller
     {
         // Call the model to extract all the data from the database
         $data = Category::all();
-        return view('backend.category.index', ['data' => $data, 'title' => 'All Categories']);
+        return view('backend.category.index',
+         [
+         'data' => $data
+        //  'title' => 'All Categories',
+        //  'meta'=>'This is meta description for all categories.'
+        ]);
     }
 
     /**

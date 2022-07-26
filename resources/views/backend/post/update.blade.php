@@ -1,6 +1,4 @@
 @extends('layout')
-@section('title','All Categories')
-@section('meta_desc','This is the meta description.')
 @section('content')
 
             <main>
@@ -27,37 +25,36 @@
                                 @endif
 
                                 @if (Session::has('success'))
-                                    <script>
-                                        Swal.fire({
-                                            position: 'top-end',
-                                            icon: 'success',
-                                            title: 'The data is inserted',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-                                    </script>
+                                    <p class="text-success">{{ session('success') }}</p>
                                 @endif
 
-                                <form method="post" action="{{ url('admin/category') }}"
+                                <form method="post" action="{{ url('admin/category/'.$data->id) }}"
                                     enctype="multipart/form-data">
                                     @csrf
+                                    @method('put')
                                     <table class="table table-bordered">
                                         <tr>
                                             <th>Title</th>
-                                            <td><input type="text" name="title" class="form-control" /></td>
+                                            <td><input type="text" name="title" value="{{ $data->title }}"
+                                                    class="form-control" /></td>
                                         </tr>
                                         <tr>
                                             <th>Detail</th>
-                                            <td><input type="text" name="detail" class="form-control" /></td>
+                                            <td><input type="text" name="detail" value="{{ $data->detail }}"
+                                                    class="form-control" /></td>
                                         </tr>
                                         <tr>
+                                            <p class="my-2" ><img width="150" id="new"
+                                                    src="{{ asset('imgs') }}/{{ $data->image }}" /></p>
                                             <th>Image</th>
-                                            <td><input type="file" name="cat_image" /></td>
+                                            <td>
+                                                <input type="hidden"  value="{{$data->image}}" name="cat_image" />
+                                                <input type="file" name="cat_image" onchange="readURL(this);" />
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
                                                 <input type="submit" class="btn btn-primary" />
-
                                             </td>
                                         </tr>
                                     </table>
@@ -66,9 +63,28 @@
                         </div>
                         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                     </div>
-
                 </div>
 
             </main>
 
-@endsection
+   @push('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+   <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#new').attr('src', e.target.result).width(150).height(100);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+@endpush
+    @endsection
+
+
+
