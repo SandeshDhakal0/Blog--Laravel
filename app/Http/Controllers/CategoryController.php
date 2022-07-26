@@ -100,6 +100,8 @@ class CategoryController extends Controller
             $reImage=time().'.'.$image->getClientOriginalExtension();
             $destination=public_path('/imgs');
             $image->move($destination,$reImage);
+        } else {
+            $reImage=$request->cat_image;
         }
         $category = Category::find($id);
         $category->title=$request->title;
@@ -118,6 +120,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::where('id',$id)->delete();
+        return redirect('admin/category');
     }
 }

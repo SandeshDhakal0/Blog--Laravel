@@ -166,8 +166,8 @@
                                     <td>{{ $cat->title }}</td>
                                     <td><img src="{{ asset('imgs').'/'.$cat->image }}" width="100px"/></td>
                                     <td>
-                                        <a class="btn btn-info btn-sm" href="{{url('admin/category'.$cat->id.'/edit')}}">Update</a>
-                                        <a class="btn btn-danger btn-sm" href="{{url('admin/category'.$cat->id.'/delete')}}">Delete</a>
+                                        <a class="btn btn-info btn-sm" href="{{ url('admin/category/'.$cat->id.'/edit') }}">Update</a>
+                                        <a onclick= "return confirm('Are you sure?')" class="btn btn-danger btn-sm" href="{{ url('admin/category/'.$cat->id.'/delete') }}">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

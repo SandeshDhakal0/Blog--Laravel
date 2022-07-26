@@ -9,6 +9,7 @@
     <meta name="author" content="" />
     <title>Add Category </title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -137,7 +138,8 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <i class="fas fa-table"></i> Add Category
-                            <a href="{{ url('admin/dashboard') }}" class="float-right btn btn-sm btn-dark">All Data</a>
+                            <a href="{{ url('/admin/category') }}" class="float-right btn btn-sm btn-dark">All
+                                Data</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -149,7 +151,15 @@
                                 @endif
 
                                 @if (Session::has('success'))
-                                    <p class="text-success">{{ session('success') }}</p>
+                                    <script>
+                                        Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'success',
+                                            title: 'The data is inserted',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    </script>
                                 @endif
 
                                 <form method="post" action="{{ url('admin/category') }}"
@@ -171,6 +181,7 @@
                                         <tr>
                                             <td colspan="2">
                                                 <input type="submit" class="btn btn-primary" />
+
                                             </td>
                                         </tr>
                                     </table>
