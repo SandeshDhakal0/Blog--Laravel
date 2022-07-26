@@ -63,14 +63,16 @@ class PostController extends Controller
             $reFullImage = $request->full_image;
         }
         $post = new Post();
+        $post->user_id = [0];
+        $post->cat_id = $request->category;
         $post->title = $request->title;
         $post->thumb = $reThumbImage;
-        $post->full_image = $reFullImage;
+        $post->full_img = $reFullImage;
         $post->detail = $request->detail;
         $post->tags = $request->tags;
         $post->save();
 
-        return redirect('admin/post/' . $id . '/edit')->with('success', 'The data has been submitted');
+        return redirect('admin/post/create')->with('success', 'The data has been submitted');
     }
 
 
