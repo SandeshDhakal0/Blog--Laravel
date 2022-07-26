@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         // Call the model to extract all the data from the database
         $data = Category::all();
-       return view('backend.category.index',['data'=>$data]);
+        return view('backend.category.index', ['data' => $data, 'title' => 'All Categories']);
     }
 
     /**
@@ -28,9 +28,7 @@ class CategoryController extends Controller
     public function create(Request $request)
     {
         return view('backend.category.add');
-
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -41,25 +39,23 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'=>'required'
+            'title' => 'required',
         ]);
 
-        if($request->hasFile('cat_image'))
-        {
-            $image=$request->file('cat_image');
-            $reImage=time().'.'.$image->getClientOriginalExtension();
-            $destination=public_path('/imgs');
-            $image->move($destination,$reImage);
+        if ($request->hasFile('cat_image')) {
+            $image = $request->file('cat_image');
+            $reImage = time() . '.' . $image->getClientOriginalExtension();
+            $destination = public_path('/imgs');
+            $image->move($destination, $reImage);
             //$newimage->imagePath = $destination.$imageName;
-
         }
-        $category = new Category;
-        $category->title=$request->title;
-        $category->detail=$request->detail;
-        $category->image= $reImage;
+        $category = new Category();
+        $category->title = $request->title;
+        $category->detail = $request->detail;
+        $category->image = $reImage;
         $category->save();
 
-        return redirect('admin/category/create')->with('success','The data has been submitted');
+        return redirect('admin/category/create')->with('success', 'The data has been submitted');
     }
 
     /**
@@ -78,7 +74,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $data = Category::find($id);
-        return view('backend.category.update',['data'=>$data]);
+        return view('backend.category.update', ['data' => $data]);
     }
 
     /**
@@ -91,25 +87,24 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title'=>'required'
+            'title' => 'required',
         ]);
 
-        if($request->hasFile('cat_image'))
-        {
-            $image=$request->file('cat_image');
-            $reImage=time().'.'.$image->getClientOriginalExtension();
-            $destination=public_path('/imgs');
-            $image->move($destination,$reImage);
+        if ($request->hasFile('cat_image')) {
+            $image = $request->file('cat_image');
+            $reImage = time() . '.' . $image->getClientOriginalExtension();
+            $destination = public_path('/imgs');
+            $image->move($destination, $reImage);
         } else {
-            $reImage=$request->cat_image;
+            $reImage = $request->cat_image;
         }
         $category = Category::find($id);
-        $category->title=$request->title;
-        $category->detail=$request->detail;
-        $category->image= $reImage;
+        $category->title = $request->title;
+        $category->detail = $request->detail;
+        $category->image = $reImage;
         $category->save();
 
-        return redirect('admin/category/'.$id.'/edit')->with('success','The data has been submitted');
+        return redirect('admin/category/' . $id . '/edit')->with('success', 'The data has been submitted');
     }
 
     /**
@@ -120,7 +115,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::where('id',$id)->delete();
+        Category::where('id', $id)->delete();
         return redirect('admin/category');
     }
 }

@@ -13,6 +13,7 @@ use App\Http\Controllers\CategoryController;
 Route::get('/',[HomeController::class,'home']);
 Route::get('/admin/login',[AdminController::class,'login']);
 Route::post('/admin/login',[AdminController::class,'submit_login']);
+
 Route::get('/admin/dashboard',[AdminController::class,'dashboard']);
 Route::get('/admin/category/{id}/delete', [CategoryController::class,'destroy']);
 
