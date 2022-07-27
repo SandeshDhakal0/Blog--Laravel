@@ -20,6 +20,8 @@ class AdminController extends Controller
         // Check is the user enters the designation
         $userCheck=Admin::where(['username'=>$request->username,'password'=>$request->password])->count();
         if($userCheck>0){
+            $adminCheck = Admin::where(['username'=>$request->username,'password'=>$request->password])->first();
+            session(['adminCheck'=> $adminCheck]);
             return redirect('admin/dashboard');
         }else{
             return redirect('admin/login')->with('error','Invalid Username/Password!!');
@@ -30,5 +32,10 @@ class AdminController extends Controller
         function dashboard(){
              return view('backend.dashboard');
         }
+
+    function logout(){
+        session()->forget(['adminCheck']);
+        return redirect('admin/login');
     }
+}
 

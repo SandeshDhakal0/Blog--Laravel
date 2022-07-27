@@ -16,6 +16,10 @@
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
 
+            @if(Session::has('adminCheck'))
+            <h3> Admin logged In</h3>
+            @endif
+
             <main>
                 <div class="container">
                     <div class="row justify-content-center">

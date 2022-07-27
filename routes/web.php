@@ -10,6 +10,7 @@ use App\Http\Controllers\PostController;
 Route::get('/',[HomeController::class,'home']);
 Route::get('/admin/login',[AdminController::class,'login']);
 Route::post('/admin/login',[AdminController::class,'submit_login']);
+Route::get('/admin/logout',[AdminController::class,'logout']);
 
 Route::get('/admin/dashboard',[AdminController::class,'dashboard']);
 // Categories
