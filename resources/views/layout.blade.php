@@ -93,6 +93,11 @@
                                     <a class="nav-link" href="{{ url('admin/post') }}">View Post</a>
                                 </nav>
                             </div>
+                            <a class="nav-link" href="{{url('admin/setting')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
+                                Setting
+                            </a>
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
