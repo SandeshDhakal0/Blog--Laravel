@@ -25,7 +25,14 @@
                                 @endif
 
                                 @if (Session::has('success'))
-                                    <p class="text-success">{{ session('success') }}</p>
+                                    {{-- <p class="text-success">{{ session('success') }}</p> --}}
+                                    <script>
+                                        Swal.fire(
+                                            'Updated!',
+                                            'The new data is updated!',
+                                            'success'
+                                        )
+                                    </script>
                                 @endif
 
                                 <form method="post" action="{{ url('admin/category/'.$data->id) }}"

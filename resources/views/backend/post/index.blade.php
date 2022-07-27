@@ -20,6 +20,7 @@
                         <tr>
                             <th>#</th>
                             <th>Title</th>
+                            <th>Thumb</th>
                             <th>Image</th>
                             <th>Action</th>
                         </tr>
@@ -28,6 +29,7 @@
                         <tr>
                             <th>#</th>
                             <th>Title</th>
+                            <th>Thumb</th>
                             <th>Image</th>
                             <th>Action</th>
                         </tr>
@@ -37,7 +39,8 @@
                             <tr>
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
-                                <td><img src="{{ asset('imgs') . '/' . $post->thumb }}" width="100px" /></td>
+                                <td><img src="{{ asset('imgs/post_thumb') . '/' . $post->thumb }}" width="100px" /></td>
+                                <td><img src="{{ asset('imgs/post_image') . '/' . $post->full_img }}" width="100px" /></td>
                                 <td>
                                     <a class="btn btn-info btn-sm"
                                         href="{{ url('admin/post/' . $post->id . '/edit') }}">Update</a>
