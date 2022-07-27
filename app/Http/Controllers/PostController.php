@@ -26,7 +26,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('backend.post.add');
+        $cats = Category::all();
+        return view('backend.post.add',['cats'=>$cats]);
     }
 
     /**
@@ -50,20 +51,21 @@ class PostController extends Controller
             $destination = public_path('/imgs');
             $image->move($destination, $reThumbImage);
         } else {
-            $reThumbImage = $request->post_thumb;
+            $reThumbImage = 'no image';
         }
         // dd($request);
         // Post full IMage
-        if ($request->hasFile('full_image')) {
-            $image = $request->file('full_image');
+        if ($request->hasFile('post_image')) {
+            $image = $request->file('post_image');
             $reFullImage = time() . '.' . $image->getClientOriginalExtension();
             $destination = public_path('/imgs');
             $image->move($destination, $reFullImage);
         } else {
-            $reFullImage = $request->full_image;
+            $reFullImage = 'no image';
         }
+
         $post = new Post();
-        $post->user_id = [0];
+        $post->user_id = 0;
         $post->cat_id = $request->category;
         $post->title = $request->title;
         $post->thumb = $reThumbImage;
@@ -72,7 +74,7 @@ class PostController extends Controller
         $post->tags = $request->tags;
         $post->save();
 
-        return redirect('admin/post/create')->with('success', 'The data has been submitted');
+        return redirect('admin/post/create')->with('success', 'Data has been submitted');
     }
 
 
@@ -86,7 +88,8 @@ class PostController extends Controller
     public function show($id)
     {
         $cats = Category::all();
-        return view('backend.post.add')->with('cats',$cats);
+        return view('backend.post.add')
+         ->with('cats',$cats);
     }
 
     /**

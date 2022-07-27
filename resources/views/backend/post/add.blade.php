@@ -26,15 +26,7 @@
                                 @endif
 
                                 @if (Session::has('success'))
-                                    <script>
-                                        Swal.fire({
-                                            position: 'top-end',
-                                            icon: 'success',
-                                            title: 'The data is inserted',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-                                    </script>
+                                    <p class="text-success">{{Session::get('success')}}</p>
                                 @endif
 
                                 <form method="post" action="{{ url('admin/post') }}"
@@ -42,9 +34,10 @@
                                     @csrf
                                     <table class="table table-bordered">
                                         <tr>
-                                            <th>Category</th>
+                                            <th>Category<span class="text-danger">*</span></th>
                                             <td>
                                                 <select class="form-control" name="category">
+                                                    <option value="" hidden="hidden" selected> Select the Category:</option>
                                                     @foreach ($cats as $cat)
                                                         <option value="{{$cat->id}}">{{$cat->title}}</option>
                                                     @endforeach
@@ -52,7 +45,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Title</th>
+                                            <th>Title <span class="text-danger">*</span></th>
                                             <td>
                                                 <input class="form-control" type="text" name="title">
                                             </td>
@@ -61,6 +54,9 @@
                                             <th>Thumbnails</th>
                                             <td>
                                                 <input type="file" name="post_thumb">
+                                                <div>
+                                                    <img src="{{}}" alt="">
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -70,7 +66,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Detail</th>
+                                            <th>Detail <span class="text-danger">*</span> </th>
                                             <td>
                                                 <textarea class="form-control" name="detail" ></textarea>
                                             </td>
