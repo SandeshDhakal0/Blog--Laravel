@@ -9,7 +9,7 @@ use App\Http\Controllers\SettingController;
 
 
 Route::get('/',[HomeController::class,'index']);
-Route::post('/save_comment/{id}',[HomeController::class,'save_comment']);
+Route::post('/save-comment/{id}',[HomeController::class,'save_comment']);
 Route::get('/detail/{id}',[HomeController::class,'detail']);
 Route::get('/admin/login',[AdminController::class,'login']);
 Route::post('/admin/login',[AdminController::class,'submit_login']);

@@ -7,8 +7,8 @@
                 <div class="row mb-5">
                     @if (count($posts) > 0)
                         @foreach ($posts as $post)
-                            <div class="col-md-4">
-                                <div class="card" >
+                            <div class="col-md-4 pb-3">
+                                <div class="card h-100"  >
                                     <a href="{{ url('detail/'. $post->id) }}">
                                         <img class="card-img-top" src="{{ asset('imgs/post_image/' . $post->full_img) }}"
                                             alt="{{ $post->title }}">
@@ -62,8 +62,11 @@
                     <div class="card-body">
                         <h5 class="card-header">Popular Posts</h5>
                         <div class="list-group list-group-flush">
-                            <a href="" class="list-group-item">Post 1</a>
-                            <a href="" class="list-group-item">Post 1</a>
+                            @if($popular_posts)
+                            @foreach($popular_posts as $post)
+                            <a href="" class="list-group-item">{{$post->title}}</a>
+                            @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
