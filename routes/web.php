@@ -8,7 +8,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingController;
 
 
-Route::get('/',[HomeController::class,'home']);
+Route::get('/',[HomeController::class,'index']);
+Route::post('/save_comment/{id}',[HomeController::class,'save_comment']);
+Route::get('/detail/{id}',[HomeController::class,'detail']);
 Route::get('/admin/login',[AdminController::class,'login']);
 Route::post('/admin/login',[AdminController::class,'submit_login']);
 Route::get('/admin/logout',[AdminController::class,'logout']);
@@ -23,3 +25,7 @@ Route::resource('admin/post',PostController::class);
 //Setting
 Route::get('admin/setting',[SettingController::class,'index']);
 Route::post('/admin/setting',[SettingController::class,'save_setting']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

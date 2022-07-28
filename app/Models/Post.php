@@ -9,4 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
+    function comment(){
+        return $this->hasMany('App\Models\Comment')->orderBy('id','desc');
+    }
 }
