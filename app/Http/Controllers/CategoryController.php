@@ -20,8 +20,7 @@ class CategoryController extends Controller
         return view('backend.category.index',
          [
          'data' => $data
-        //  'title' => 'All Categories',
-        //  'meta'=>'This is meta description for all categories.'
+
         ]);
     }
 
@@ -103,11 +102,11 @@ class CategoryController extends Controller
         } else {
             $reImage = $request->cat_image;
         }
-        $category = Category::find($id);
-        $category->title = $request->title;
-        $category->detail = $request->detail;
-        $category->image = $reImage;
-        $category->save();
+            $category = Category::find($id);
+            $category->title = $request->title;
+            $category->detail = $request->detail;
+            $category->image = $reImage;
+            $category->save();
 
         return redirect('admin/category/' . $id . '/edit')->with('success', 'The data has been submitted');
     }
