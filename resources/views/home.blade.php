@@ -45,26 +45,26 @@
                 </div>
 
             {{-- Recent Post --}}
-                <div class="card mb-4">
+                <div class="card mb-4 pb-3">
                     <div class="card-body">
                         <h5 class="card-header">Recent Posts</h5>
                         <div class="list-group list-group-flush">
                             @if($recent_posts)
                                 @foreach ($recent_posts as $post )
-                                    <a href="" class="list-group-item">{{$post->title}}</a>
+                                    <a href="{{ url('detail/'. $post->id) }}" class="list-group-item">{{$post->title}}</a>
                                 @endforeach
                                 @endif
                         </div>
                     </div>
 
                 {{-- Popular Post --}}
-                <div class="card mb-4">
-                    <div class="card-body">
+                <div class="card mb-4 pb-3">
+                    <div class="card-body pb-3">
                         <h5 class="card-header">Popular Posts</h5>
                         <div class="list-group list-group-flush">
                             @if($popular_posts)
                             @foreach($popular_posts as $post)
-                            <a href="" class="list-group-item">{{$post->title}}</a>
+                            <a href="{{ url('detail/'. $post->id) }}" class="list-group-item">{{$post->title}}</a>
                             @endforeach
                             @endif
                         </div>

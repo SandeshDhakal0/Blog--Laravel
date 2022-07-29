@@ -1,5 +1,5 @@
 @extends('frontlayout')
-@section('title', 'detail')
+@section('title', $detail->title)
 @section('content')
 
     <div class="row">
@@ -74,7 +74,7 @@
                     <div class="list-group list-group-flush">
                         @if ($recent_posts)
                             @foreach ($recent_posts as $post)
-                                <a href="" class="list-group-item">{{ $post->title }}</a>
+                                <a href="{{ url('detail/'. $post->id) }}" class="list-group-item">{{ $post->title }}</a>
                             @endforeach
                         @endif
                     </div>
@@ -87,7 +87,7 @@
                         <div class="list-group list-group-flush">
                             @if ($popular_posts)
                                 @foreach ($popular_posts as $post)
-                                    <a href="" class="list-group-item">{{ $post->title }}</a>
+                                    <a href="{{ url('detail/'. $post->id) }}" class="list-group-item">{{ $post->title }}</a>
                                 @endforeach
                             @endif
                         </div>

@@ -21,10 +21,7 @@ class HomeController extends Controller
     }
 
     function detail(Request $request,$postId){
-        // To count the views
-        // $d = DB::select('select * from posts where id = ?', [$postId])->increment('views');
 
-        // dd($d);
         Post::find($postId)->increment('views');
         $detail=Post::find($postId);
         return view('detail',['detail'=>$detail]);
