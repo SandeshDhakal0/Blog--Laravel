@@ -6,7 +6,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingController;
-
+use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Auth;
+// Route::get('/',function(){
+//     return view('home');
+// });
 
 Route::get('/',[HomeController::class,'index']);
 Route::post('/save-comment/{id}',[HomeController::class,'save_comment']);
@@ -25,7 +29,12 @@ Route::resource('admin/post',PostController::class);
 //Setting
 Route::get('admin/setting',[SettingController::class,'index']);
 Route::post('/admin/setting',[SettingController::class,'save_setting']);
-
+// For the user login
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Contact Us page
+Route::get('admin/contact',[ContactController::class,'index']);
+Route::post('send-email',[ContactController::class,'sendEmail'])->name('send.email');
+// Route::get('admin/send-mail',[ContactController::class,'sendEmail']);

@@ -97,6 +97,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
                                 Setting
                             </a>
+                            <a class="nav-link" href="{{url('admin/emailsend')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-cog"></i></div>
+                                Contact Us
+                            </a>
 
                         </div>
                     </div>
